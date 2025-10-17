@@ -1,0 +1,6 @@
+export const MAX_INPUT_BYTE = 10000;
+
+export const MAX_CUSTOM_SEPARATOR_LENGTH = 10;
+export const MAX_CUSTOM_SEPARATOR_COUNT = 10;
+
+export const MAX_RESULT_SAFE_INTEGER = Number.MAX_SAFE_INTEGER;
