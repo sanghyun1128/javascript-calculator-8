@@ -4,11 +4,14 @@ import {
   TOO_MANY_CUSTOM_SEPARATORS,
   RESULT_OVERFLOW,
   WRONG_EXPRESSION,
+  MINUS_IS_NOT_ALLOWED,
+  INVALID_SIGNIFICANT_DIGITS,
 } from '../const/errorMessages.js';
 import {
   MAX_CUSTOM_SEPARATOR_COUNT,
   MAX_CUSTOM_SEPARATOR_LENGTH,
   MAX_RESULT_SAFE_INTEGER,
+  MAX_SIGNIFICANT_DIGITS,
 } from '../const/limits.js';
 import DEFAULT_SEPARATORS from '../const/defaultSeparators.js';
 import StringUtils from '../string/StringUtils.js';
@@ -23,7 +26,13 @@ export default class Calculator {
     if (this.customSeparators.size >= MAX_CUSTOM_SEPARATOR_COUNT)
       throw new Error(TOO_MANY_CUSTOM_SEPARATORS);
 
-    if (separator.includes('//') || separator.includes('\\n') || /\d/.test(separator))
+    if (
+      separator.includes('//') ||
+      separator.includes('\\n') ||
+      separator.includes('-') ||
+      separator.includes('.') ||
+      /\d/.test(separator)
+    )
       throw new Error(BANNED_CUSTOM_SEPARATOR);
 
     if (separator.length > MAX_CUSTOM_SEPARATOR_LENGTH)
@@ -42,6 +51,8 @@ export default class Calculator {
 
     expression.split(regEx).forEach((e) => {
       if (e === '' || Number.isNaN(+e)) throw new Error(WRONG_EXPRESSION);
+      if (+e < 0) throw new Error(MINUS_IS_NOT_ALLOWED);
+      if (e.length > MAX_SIGNIFICANT_DIGITS) throw new Error(INVALID_SIGNIFICANT_DIGITS);
     });
 
     this.expression = expression;
