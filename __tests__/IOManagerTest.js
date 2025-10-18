@@ -45,14 +45,11 @@ describe('IOManager 테스트', () => {
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
   });
 
-  test('에러 출력 테스트', async () => {
+  test('에러문 형식 만들기', async () => {
     const input = 'error';
     const output = `${ERROR_PREFIX}${PREFIX_CONTENT_SEPARATOR}${input}`;
 
-    const logSpy = getLogSpy();
-    IOManager.printError(input);
-
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    expect(IOManager.getFullErrorMessage(input)).toBe(output);
   });
 
   test('입력 없을 경우 에러 발생', async () => {
