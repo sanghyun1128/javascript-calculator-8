@@ -65,14 +65,13 @@
   - 커스텀 구분자 저장하기
     - 예외처리
       - 구분자에 '//', '\n', 숫자가 포함될 경우
-      - 구분자에 공백(' ')과 다른 문자가 같이 있는 경우
-      - 구분자의 길이 `MAX_CUSTOM_SEPARATOR_LENGTH` 이상일 경우
-      - 커스텀 구분자의 갯수가 `MAX_CUSTOM_SEPARATOR_COUNT` 이상일 경우
+      - 구분자의 길이 `MAX_CUSTOM_SEPARATOR_LENGTH` 보다 클 경우
+      - 커스텀 구분자의 갯수가 `MAX_CUSTOM_SEPARATOR_COUNT` 보다 클 경우
   - 계산식 저장하기
     - 예외처리
       - 숫자, 기본 구분자, 커스텀 구분자 외에 다른 문자가 있을 경우
-      - 구분자가 연속으로 있을 경우
       - 숫자가 존재하지 않을 경우
+      - 구분자가 연속으로 있을 경우
   - 계산식과 구분자를 이용해서 계산하는 함수
     - 예외처리
-      - 결과의 크기가 `MAX_RESULT_SAFE_INTEGER` 이상 일 경우
+      - 결과의 크기가 `MAX_RESULT_SAFE_INTEGER` 보다 클 경우
