@@ -4,6 +4,7 @@ export const LONG_INPUT = '입력 값이 너무 깁니다.';
 
 // Expression
 export const EMPTY_EXPRESSION = '계산식이 입력되지 않았습니다.';
+export const WRONG_EXPRESSION = '계산식이 올바르지 않습니다.';
 
 // Separator
 export const CUSTOM_SEPARATOR_NOT_WRAPPED = '커스텀 구분자는 //과 \\n으로 감싸야 합니다.';
