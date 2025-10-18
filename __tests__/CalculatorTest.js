@@ -5,6 +5,8 @@ import {
   TOO_MANY_CUSTOM_SEPARATORS,
   WRONG_EXPRESSION,
   RESULT_OVERFLOW,
+  MINUS_IS_NOT_ALLOWED,
+  INVALID_SIGNIFICANT_DIGITS,
 } from '../src/const/errorMessages.js';
 import { MAX_CUSTOM_SEPARATOR_LENGTH, MAX_RESULT_SAFE_INTEGER } from '../src/const/limits.js';
 
@@ -28,7 +30,23 @@ describe('Calculator 테스트', () => {
   });
 
   test('\\n 포함한 커스텀 구분자 저장시 에러 발생', async () => {
-    const input = '\\n';
+    const input = 'u\\n';
+
+    const calculator = new Calculator();
+
+    expect(() => calculator.addCustomSeparator(input)).toThrow(BANNED_CUSTOM_SEPARATOR);
+  });
+
+  test('- 포함한 커스텀 구분자 저장시 에러 발생', async () => {
+    const input = '-d';
+
+    const calculator = new Calculator();
+
+    expect(() => calculator.addCustomSeparator(input)).toThrow(BANNED_CUSTOM_SEPARATOR);
+  });
+
+  test('. 포함한 커스텀 구분자 저장시 에러 발생', async () => {
+    const input = '. ';
 
     const calculator = new Calculator();
 
@@ -85,9 +103,35 @@ describe('Calculator 테스트', () => {
     expect(() => calculator.setExpression(input)).toThrow(WRONG_EXPRESSION);
   });
 
+  test('값에 음수가 있을 경우 에러 발생', async () => {
+    const input = `123,123,-123`;
+
+    const calculator = new Calculator();
+
+    expect(() => calculator.setExpression(input)).toThrow(MINUS_IS_NOT_ALLOWED);
+  });
+
+  test('숫자 자릿수가 너무 길 경우 에러 발생', async () => {
+    const input = `123,123,0.1231231231231231`;
+
+    const calculator = new Calculator();
+
+    expect(() => calculator.setExpression(input)).toThrow(INVALID_SIGNIFICANT_DIGITS);
+  });
+
   test('일반 계산', async () => {
     const input = '123,123,123';
     const output = 123 + 123 + 123;
+
+    const calculator = new Calculator();
+    calculator.setExpression(input);
+
+    expect(calculator.sumExpression()).toBe(output);
+  });
+
+  test('소수 계산', async () => {
+    const input = '123,0.123,123';
+    const output = 123 + 0.123 + 123;
 
     const calculator = new Calculator();
     calculator.setExpression(input);
