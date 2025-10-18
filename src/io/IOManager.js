@@ -24,7 +24,8 @@ export default class IOManager {
     Console.print(`${RESULT_PREFIX}${PREFIX_CONTENT_SEPARATOR}${message}`);
   }
 
-  static printError(message) {
-    Console.print(`${ERROR_PREFIX}${PREFIX_CONTENT_SEPARATOR}${message}`);
+  static getFullErrorMessage(message) {
+    const fullErrorMessage = `${ERROR_PREFIX}${PREFIX_CONTENT_SEPARATOR}${message}`;
+    return fullErrorMessage;
   }
 }
