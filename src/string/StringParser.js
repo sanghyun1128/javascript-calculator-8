@@ -1,6 +1,6 @@
-import { CUSTOM_SEPARATOR_NOT_WRAPPED, EMPTY_EXPRESSION } from '../const/errorMessages.js';
 import DEFAULT_SEPARATORS from '../const/defaultSeparators.js';
 import StringUtils from './StringUtils.js';
+import Validator from '../validation/Validator.js';
 
 export default class StringParser {
   static extractCustomSeparatorDeclaration(rawInput) {
@@ -9,7 +9,7 @@ export default class StringParser {
     const startIndex = rawInput.indexOf('//');
     const endIndex = rawInput.lastIndexOf('\\n');
 
-    if (startIndex === 0 && endIndex === -1) throw new Error(CUSTOM_SEPARATOR_NOT_WRAPPED);
+    Validator.validateCustomSeparatorDeclarationFormat(rawInput);
 
     if (startIndex !== -1 && endIndex !== -1) {
       customSeparatorDeclaration = rawInput.substring(startIndex + 2, endIndex);
@@ -25,7 +25,7 @@ export default class StringParser {
     if (startIndex === -1) expression = rawInput;
     else expression = rawInput.substring(startIndex + 2).trim();
 
-    if (expression.length === 0) throw new Error(EMPTY_EXPRESSION);
+    Validator.validateExpressionNotEmpty(expression);
 
     return expression;
   }

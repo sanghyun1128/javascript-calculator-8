@@ -8,7 +8,7 @@ export const WRONG_EXPRESSION = '계산식이 올바르지 않습니다.';
 
 // Separator
 export const CUSTOM_SEPARATOR_NOT_WRAPPED = '커스텀 구분자는 //과 \\n으로 감싸야 합니다.';
-export const BANNED_CUSTOM_SEPARATOR =
+export const DO_NOT_USE_BANNED_CUSTOM_SEPARATOR =
   '//, \\n, -, ., 숫자 는 커스텀 구분자로 사용 할 수 없습니다.';
 export const INVALID_CUSTOM_SEPARATOR_LENGTH = '구분자는 최대 10자까지 입력할 수 있습니다.';
 export const TOO_MANY_CUSTOM_SEPARATORS = '구분자는 최대 10개까지 지정할 수 있습니다.';
